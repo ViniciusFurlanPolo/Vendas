@@ -23,6 +23,8 @@ CREATE TABLE IF NOT EXISTS `venda` (
     PRIMARY KEY(`id`)
     FOREIGN KEY(`id_func`)
     REFERENCES `funcionario` (`id`)
+    FOREIGN KEY(`nome_func`)
+    REFERENCES `fucionario` (`nome`)
     ON DELETE NO ACTION
     ON UPTADE NO ACTION)
 ENGINE = InnoDB;
