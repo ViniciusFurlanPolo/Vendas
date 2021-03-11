@@ -33,6 +33,8 @@ public class Venda implements Serializable{
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Funcionario funcionario;
+	
+	private int periodo;
 
 	public int getId() {
 		return id;
@@ -64,6 +66,14 @@ public class Venda implements Serializable{
 
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
+	}
+	
+	public int getPeriodo() {
+		return periodo;
+	}
+	
+	public void setPeriodo(int periodo) {
+		this.periodo = periodo;
 	}
 	
 	@Override
