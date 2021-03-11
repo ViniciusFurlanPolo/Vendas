@@ -1,10 +1,10 @@
 -- -----------------------------------------------------
--- Table `funcioario`
+-- Table `Funcionario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `funcionario` (
+CREATE TABLE IF NOT EXISTS `Funcionario` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` CHAR(100) NOT NULL,
-  `total_de_vendas` INT NOT NULL,
+  `totalVendas` INT NOT NULL,
     PRIMARY KEY(`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -12,9 +12,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `venda`
+-- Table `Venda`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `venda` (
+CREATE TABLE IF NOT EXISTS `Venda` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `data_da_venda` DATE NOT NULL,
   `valor` DOUBLE NOT NULL,

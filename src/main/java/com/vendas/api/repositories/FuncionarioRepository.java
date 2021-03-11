@@ -20,7 +20,7 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 	
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query("UPDATE funcionario SET total_de_vendas = :novoTotal WHERE id = :id")
+	@Query("UPDATE Funcionario SET totalVendas = :novoTotal WHERE id = :id")
 	void alteraTotalVendas(@Param("novoTotal") int totalVendas, @Param("id") int id);
 	
 	

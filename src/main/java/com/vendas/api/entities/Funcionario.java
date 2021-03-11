@@ -22,7 +22,7 @@ public class Funcionario implements Serializable {
 	@Column(name = "nome", nullable = false, length = 100)
 	private String nome;
 	
-	@Column(name = "total_de_vendas", nullable = false)
+	@Column(name = "totalVendas", nullable = false)
 	private int totalVendas;
 
 	public int getId() {
@@ -53,7 +53,7 @@ public class Funcionario implements Serializable {
 	public String toString() {
 		return "funcionario[" + "id=" + id + ","
 				+ "nome=" + nome + ","
-				+ "total_de_vendas=" + totalVendas + "]";
+				+ "totalVendas=" + totalVendas + "]";
 	}
 
 }
