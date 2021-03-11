@@ -16,7 +16,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Venda` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `data_da_venda` DATE NOT NULL,
+  `dataVenda` DATE NOT NULL,
   `valor` DOUBLE NOT NULL,
   `id_func` INT NOT NULL,
   `nome_func` CHAR(100) NOT NULL,

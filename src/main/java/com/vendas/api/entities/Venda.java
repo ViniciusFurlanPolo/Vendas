@@ -24,7 +24,7 @@ public class Venda implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@Column(name = "data_da_venda", nullable = false)
+	@Column(name = "dataVenda", nullable = false)
 	private Date dataVenda;
 	
 	@Column(name = "valor", nullable = false)
@@ -79,7 +79,7 @@ public class Venda implements Serializable{
 	@Override
    	public String toString() {
          	return "venda[" + "id=" + id + ","
-                       	+ "data_da_venda=" + dataVenda + ","
+                       	+ "dataVenda=" + dataVenda + ","
                        	+ "valor=" + valor + ","
                        	+ "funcionario=" + funcionario + "]";
 	}

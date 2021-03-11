@@ -17,6 +17,6 @@ public interface VendaRepository extends JpaRepository<Venda, Integer> {
 	
 	@Transactional
 	//@Query("SELECT vd FROM Venda vd WHERE vd.data_da_venda = :data")
-	List<Venda> findBydata_da_venda(Date data);
+	List<Venda> findBydataVenda(Date data);
 
 }
