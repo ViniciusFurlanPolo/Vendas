@@ -24,6 +24,16 @@ public class Funcionario implements Serializable {
 	
 	@Column(name = "totalVendas", nullable = false)
 	private int totalVendas;
+	
+	private int mediaVendas;
+
+	public int getMediaVendas() {
+		return mediaVendas;
+	}
+
+	public void setMediaVendas(int mediaVendas) {
+		this.mediaVendas = mediaVendas;
+	}
 
 	public int getId() {
 		return id;
