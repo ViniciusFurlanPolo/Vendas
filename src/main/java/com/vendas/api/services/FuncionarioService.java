@@ -23,10 +23,6 @@ public class FuncionarioService {
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
 	
-	@Autowired
-	private VendaRepository vendaRepository;
-	
-	
 	private CalculoMedia calculoMedia;
 	
 	public Optional<Funcionario> buscarPorId(int id) throws ConsistenciaException {
