@@ -15,9 +15,6 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 	@Transactional(readOnly = true)
 	Funcionario findBynome(String nome);
 	
-	@Transactional(readOnly = true)
-	List<Funcionario> findAll();
-	
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query("UPDATE Funcionario SET totalVendas = :novoTotal WHERE id = :id")

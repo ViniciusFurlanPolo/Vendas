@@ -25,6 +25,7 @@ public class Funcionario implements Serializable {
 	@Column(name = "totalVendas", nullable = false)
 	private int totalVendas;
 	
+	@Column(name = "mediaVendas", nullable = false)
 	private int mediaVendas;
 
 	public int getMediaVendas() {

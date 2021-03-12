@@ -34,7 +34,6 @@ public class Venda implements Serializable{
    	@ManyToOne(fetch = FetchType.EAGER)
 	private Funcionario funcionario;
 	
-	private int periodo;
 
 	public int getId() {
 		return id;
@@ -68,13 +67,6 @@ public class Venda implements Serializable{
 		this.funcionario = funcionario;
 	}
 	
-	public int getPeriodo() {
-		return periodo;
-	}
-	
-	public void setPeriodo(int periodo) {
-		this.periodo = periodo;
-	}
 	
 	@Override
    	public String toString() {

@@ -38,17 +38,17 @@ public class FuncionarioService {
 		return funcionario;
 	}
 	
-	public Optional<List<Funcionario>> buscasTodos (int periodo) throws ConsistenciaException, ParseException{
+	public List<Funcionario> buscasTodos (int periodo) throws ConsistenciaException, ParseException{
 		log.info("Service: Buscando todos os funcionarios");
 		
-		Optional<List<Funcionario>> funcionarios = Optional.ofNullable(funcionarioRepository.findAll());
+		List<Funcionario> funcionarios = funcionarioRepository.findAll();
 		
-		if(!funcionarios.isPresent() || funcionarios.get().size() < 1) {
+		if(funcionarios.size() < 1) {
 			log.info("Service: Nenhum funcionario encontrado");
 			throw new ConsistenciaException("Nenhum funcionario encontado");
 		}
 		
-		Optional<List<Funcionario>> funcMedia = calculoMedia.calculaMedia(periodo, funcionarios);
+		List<Funcionario> funcMedia = calculoMedia.calculaMedia(periodo, funcionarios);
 		
 		return funcMedia;
 	}

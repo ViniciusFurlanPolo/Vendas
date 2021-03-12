@@ -22,7 +22,7 @@ public class CalculoMedia {
 	
 	
 	@SuppressWarnings("deprecation")
-	public Optional<List<Funcionario>> calculaMedia (int periodo, Optional<List<Funcionario>> funcionarios) throws ConsistenciaException , ParseException{
+	public List<Funcionario> calculaMedia (int periodo, List<Funcionario> funcionarios) throws ConsistenciaException , ParseException{
 		
 		Date now = new Date();
 		
@@ -31,7 +31,7 @@ public class CalculoMedia {
 		List<Long> datas = new ArrayList<Long>();
 		List<String> datasString = new ArrayList<String>();
 		
-		for(int cont = 0; cont < funcionarios.get().size(); cont++) {
+		for(int cont = 0; cont < funcionarios.size(); cont++) {
 			int media = 0;
 			int aux2 = 0;
 			for(int cont2 = 1; cont < periodo; cont++) {
@@ -42,7 +42,7 @@ public class CalculoMedia {
 				List<Venda> vendas = vendaRepository.findBydataVenda(data);
 				int aux = 0;
 				for(int cont3 = 0; cont < vendas.size(); cont++) {
-					if(funcionarios.get().get(cont).getId() == vendas.get(cont2).getFuncionario().getId()) {
+					if(funcionarios.get(cont).getId() == vendas.get(cont2).getFuncionario().getId()) {
 						aux++;
 					}
 				}
@@ -52,7 +52,7 @@ public class CalculoMedia {
 			}
 			media = media / aux2;
 			
-			funcionarios.get().get(cont).setMediaVendas(media);
+			funcionarios.get(cont).setMediaVendas(media);
 			
 			
 		}

@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.vendas.api.dto.FuncionarioDto;
 import com.vendas.api.entities.Funcionario;
 import com.vendas.api.response.Response;
 import com.vendas.api.services.FuncionarioService;
 import com.vendas.api.utils.ConsistenciaException;
+import com.vendas.api.utils.ConversaoUtils;
 
 @Controller
 @RequestMapping("/api/funcionarios")
@@ -30,15 +32,15 @@ public class FuncionarioController {
 	
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Response<Funcionario>> buscarPorId(@PathVariable("id") int id){
-		Response<Funcionario> response = new Response<Funcionario>();
+	public ResponseEntity<Response<FuncionarioDto>> buscarPorId(@PathVariable("id") int id){
+		Response<FuncionarioDto> response = new Response<FuncionarioDto>();
 		
 		try {
 			log.info("Controller: buscando funcionario com o id: {}", id);
 			
 			Optional<Funcionario> funcionario = funcionarioService.buscarPorId(id);
 			
-			response.setDados(funcionario.get());
+			response.setDados(ConversaoUtils.converterFuncionario(funcionario.get()));
 			
 			return ResponseEntity.ok(response);
 		
@@ -63,9 +65,9 @@ public class FuncionarioController {
 		try {
 			log.info("Controller: buscando todos os funcionarios");
 			
-			Optional<List<Funcionario>> funcionarios = funcionarioService.buscasTodos(periodo);
+			List<Funcionario> funcionarios = funcionarioService.buscasTodos(periodo);
 			
-			response.setDados(funcionarios.get());
+			response.setDados(funcionarios);
 			
 			return ResponseEntity.ok(response);
 			
