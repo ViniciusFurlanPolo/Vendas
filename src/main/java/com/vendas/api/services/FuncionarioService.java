@@ -1,5 +1,6 @@
 package com.vendas.api.services;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import com.vendas.api.entities.Funcionario;
 import com.vendas.api.repositories.FuncionarioRepository;
 import com.vendas.api.repositories.VendaRepository;
 import com.vendas.api.utils.ConsistenciaException;
+import com.vendas.api.utils.CalculoMedia;
 
 @Service
 public class FuncionarioService {
@@ -23,6 +25,9 @@ public class FuncionarioService {
 	
 	@Autowired
 	private VendaRepository vendaRepository;
+	
+	@Autowired
+	private CalculoMedia calculoMedia;
 	
 	public Optional<Funcionario> buscarPorId(int id) throws ConsistenciaException {
 		log.info("Service: buscando um funcionario com o id: {}", id);
@@ -37,7 +42,7 @@ public class FuncionarioService {
 		return funcionario;
 	}
 	
-	public Optional<List<Funcionario>> buscasTodos (int periodo) throws ConsistenciaException{
+	public Optional<List<Funcionario>> buscasTodos (int periodo) throws ConsistenciaException, ParseException{
 		log.info("Service: Buscando todos os funcionarios");
 		
 		Optional<List<Funcionario>> funcionarios = Optional.ofNullable(funcionarioRepository.findAll());
@@ -47,8 +52,8 @@ public class FuncionarioService {
 			throw new ConsistenciaException("Nenhum funcionario encontado");
 		}
 		
+		Optional<List<Funcionario>> funcMedia = calculoMedia.calculaMedia(periodo, funcionarios);
 		
-		
-		return funcionarios;
+		return funcMedia;
 	}
 }
