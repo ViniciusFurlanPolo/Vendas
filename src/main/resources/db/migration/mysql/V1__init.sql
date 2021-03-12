@@ -6,8 +6,7 @@ CREATE TABLE IF NOT EXISTS `Funcionario` (
   `nome` CHAR(100) NOT NULL,
   `totalVendas` INT NOT NULL,
     PRIMARY KEY(`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+)
 ENGINE = InnoDB;
 
 
@@ -20,11 +19,9 @@ CREATE TABLE IF NOT EXISTS `Venda` (
   `valor` DOUBLE NOT NULL,
   `id_func` INT NOT NULL,
   `nome_func` CHAR(100) NOT NULL,
-    PRIMARY KEY(`id`)
+    PRIMARY KEY(`id`),
+    CONSTRAINT `FK_Funcionario_id`
     FOREIGN KEY(`id_func`)
-    REFERENCES `funcionario` (`id`)
-    FOREIGN KEY(`nome_func`)
-    REFERENCES `fucionario` (`nome`)
-    ON DELETE NO ACTION
-    ON UPTADE NO ACTION)
+    REFERENCES `Funcionario` (`id`)
+)
 ENGINE = InnoDB;

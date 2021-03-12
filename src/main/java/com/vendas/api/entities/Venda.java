@@ -31,7 +31,7 @@ public class Venda implements Serializable{
 	private double valor;
 	
 	@JsonBackReference
-	@ManyToOne(fetch = FetchType.EAGER)
+   	@ManyToOne(fetch = FetchType.EAGER)
 	private Funcionario funcionario;
 	
 	private int periodo;
