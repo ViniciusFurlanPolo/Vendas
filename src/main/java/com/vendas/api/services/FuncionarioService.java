@@ -26,7 +26,7 @@ public class FuncionarioService {
 	@Autowired
 	private VendaRepository vendaRepository;
 	
-	@Autowired
+	
 	private CalculoMedia calculoMedia;
 	
 	public Optional<Funcionario> buscarPorId(int id) throws ConsistenciaException {
