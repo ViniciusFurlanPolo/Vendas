@@ -26,7 +26,7 @@ public class VendasService {
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
 	
-	private Optional<Venda> buscarPorId(int id) throws ConsistenciaException {
+	public Optional<Venda> buscarPorId(int id) throws ConsistenciaException {
 		log.info("Service: buscando uma venda de id: {}", id);
 		
 		Optional<Venda> venda = vendaRepository.findById(id);
