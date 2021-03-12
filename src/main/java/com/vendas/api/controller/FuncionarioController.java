@@ -58,16 +58,16 @@ public class FuncionarioController {
 	}
 	
 	@GetMapping(value = "/todos/{periodo}")
-	public ResponseEntity<Response<List<Funcionario>>> buscarTodosFuncionarios(@PathVariable("periodo") int periodo) {
+	public ResponseEntity<Response<List<FuncionarioDto>>> buscarTodosFuncionarios(@PathVariable("periodo") int periodo) {
 		
-		Response<List<Funcionario>> response = new Response<List<Funcionario>>();
+		Response<List<FuncionarioDto>> response = new Response<List<FuncionarioDto>>();
 		
 		try {
 			log.info("Controller: buscando todos os funcionarios");
 			
 			List<Funcionario> funcionarios = funcionarioService.buscasTodos(periodo);
 			
-			response.setDados(funcionarios);
+			response.setDados(ConversaoUtils.converterListaFuncionarios(funcionarios));
 			
 			return ResponseEntity.ok(response);
 			

@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.vendas.api.dto.VendasDto;
 import com.vendas.api.entities.Venda;
 import com.vendas.api.response.Response;
 import com.vendas.api.services.VendasService;
 import com.vendas.api.utils.ConsistenciaException;
+import com.vendas.api.utils.ConversaoUtils;
 
 @Controller
 @RequestMapping("/api/vendas")
@@ -61,14 +63,16 @@ public class VendasController {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<Response<Venda>> salvar(@RequestBody Venda venda) {
+	public ResponseEntity<Response<VendasDto>> salvar(@RequestBody VendasDto vendaDto) {
 		
-		Response<Venda> response = new Response<Venda>();
+		Response<VendasDto> response = new Response<VendasDto>();
 		
 		try {
-			log.info("Controller: salvando a venda: {}", venda.toString());
+			log.info("Controller: salvando a venda: {}", vendaDto.toString());
 			
-			response.setDados(this.vendasService.salvar(venda));
+			Venda venda = this.vendasService.salvar(ConversaoUtils.converterVendaDto(vendaDto));
+			
+			response.setDados(ConversaoUtils.converterVenda(venda));
 			
 			return ResponseEntity.ok(response);
 		} catch (ConsistenciaException e) {

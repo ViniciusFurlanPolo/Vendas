@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vendas.api.dto.FuncionarioDto;
+import com.vendas.api.dto.VendasDto;
 import com.vendas.api.entities.Funcionario;
+import com.vendas.api.entities.Venda;
 
 public class ConversaoUtils {
 	
@@ -48,6 +50,36 @@ public class ConversaoUtils {
 		}
 		
 		return funcionariosDto;
+	}
+	
+	public static Venda converterVendaDto(VendasDto vendaDto) {
+		
+		Venda venda = new Venda();
+		
+		if(vendaDto.getId() != null && vendaDto.getId() !="")
+			venda.setId(Integer.parseInt(vendaDto.getId()));
+		
+		venda.setValor(Double.parseDouble(vendaDto.getValor()));
+		
+		Funcionario func = new Funcionario();
+		func.setNome(vendaDto.getNomeFunc());
+		
+		venda.setFuncionario(func);
+		
+		
+		return venda;
+	}
+	
+	public static VendasDto converterVenda(Venda venda) {
+		
+		VendasDto vendaDto = new VendasDto();
+		
+		vendaDto.setId(Integer.toString(venda.getId()));
+		vendaDto.setNomeFunc(venda.getFuncionario().getNome());
+		vendaDto.setValor(Double.toString(venda.getValor()));
+		vendaDto.setDataVenda(venda.getDataVenda().toString());
+		
+		return vendaDto;
 	}
 
 }
