@@ -1,0 +1,1 @@
+AlTER TABLE venda RENAME COLUMN `funcionario_nome` to `nomefunc`

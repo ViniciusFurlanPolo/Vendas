@@ -61,10 +61,12 @@ public class ConversaoUtils {
 		
 		venda.setValor(Double.parseDouble(vendaDto.getValor()));
 		
-		Funcionario func = new Funcionario();
+		venda.setNomeFunc(vendaDto.getNomeFunc());
+		
+		/*Funcionario func = new Funcionario();
 		func.setNome(vendaDto.getNomeFunc());
 		
-		venda.setFuncionario(func);
+		venda.setFuncionario(func);*/
 		
 		
 		return venda;

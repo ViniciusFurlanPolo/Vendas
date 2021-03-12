@@ -30,10 +30,21 @@ public class Venda implements Serializable{
 	@Column(name = "valor", nullable = false)
 	private double valor;
 	
+	@Column(name = "nomefunc", nullable = false)
+	private String nomeFunc;
+	
 	@JsonBackReference
    	@ManyToOne(fetch = FetchType.EAGER)
 	private Funcionario funcionario;
 	
+
+	public String getNomeFunc() {
+		return nomeFunc;
+	}
+
+	public void setNomeFunc(String nomeFunc) {
+		this.nomeFunc = nomeFunc;
+	}
 
 	public int getId() {
 		return id;

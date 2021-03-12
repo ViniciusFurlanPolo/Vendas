@@ -44,12 +44,12 @@ public class VendasService {
 		
 		Date now = new Date();
 		
-		Funcionario func = funcionarioRepository.findBynome(venda.getFuncionario().getNome());
+		Funcionario func = funcionarioRepository.findBynome(venda.getNomeFunc());
 		int aux = func.getTotalVendas();
 		func.setTotalVendas(aux + 1);
 		
 		venda.setDataVenda(now);
-		venda.setId(func.getId());
+		venda.setFuncionario(func);
 		
 		if(venda.getId() > 0)
 			buscarPorId(venda.getId());
