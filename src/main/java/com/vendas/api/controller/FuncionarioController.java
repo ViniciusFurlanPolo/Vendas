@@ -1,5 +1,6 @@
 package com.vendas.api.controller;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -7,6 +8,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,6 +23,7 @@ import com.vendas.api.response.Response;
 import com.vendas.api.services.FuncionarioService;
 import com.vendas.api.utils.ConsistenciaException;
 import com.vendas.api.utils.ConversaoUtils;
+import com.vendas.api.utils.InicioFimEntitie;
 
 @Controller
 @RequestMapping("/api/funcionarios")
@@ -60,14 +63,14 @@ public class FuncionarioController {
 	}
 	
 	@GetMapping(value = "/todos")
-	public ResponseEntity<Response<List<FuncionarioDto>>> buscarTodosFuncionarios(@RequestBody Date periodo) {
+	public ResponseEntity<Response<List<FuncionarioDto>>> buscarTodosFuncionarios(@RequestBody InicioFimEntitie inicioFim) {
 		
 		Response<List<FuncionarioDto>> response = new Response<List<FuncionarioDto>>();
 		
 		try {
 			log.info("Controller: buscando todos os funcionarios");
 			
-			List<Funcionario> funcionarios = funcionarioService.buscasTodos(periodo);
+			List<Funcionario> funcionarios = funcionarioService.buscasTodos(inicioFim);
 			
 			response.setDados(ConversaoUtils.converterListaFuncionarios(funcionarios));
 			

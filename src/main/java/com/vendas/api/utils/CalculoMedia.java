@@ -3,6 +3,8 @@ package com.vendas.api.utils;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,17 +24,24 @@ public class CalculoMedia {
 	
 	
 	
-	public List<Funcionario> calculaMedia (Date periodo, List<Funcionario> funcionarios) throws ConsistenciaException , ParseException{
+	public List<Funcionario> calculaMedia (InicioFimEntitie inicioFim, List<Venda> vendas, List<Funcionario> funcionarios) throws ConsistenciaException , ParseException{
 		
-		Date now = new Date();
+		//List<Venda> vendas = vendaRepository.findPordataVenda(inicioFim.getInicio(), inicioFim.getFim());
 		
-		long milliNow = now.getTime();
-		long milliPeriodo = periodo.getTime();
-		long diff = milliNow - milliPeriodo;
+		String[] numIni = inicioFim.getInicio().split("-");
+		String[] numFim = inicioFim.getFim().split("-");
 		
-		int diasPeriodo = (int) (diff / (1000*60*60*24));
+		int anoIni = Integer.parseInt(numIni[0]);
+		int mesIni = Integer.parseInt(numIni[1]);
+		int diaIni = Integer.parseInt(numIni[2]);
+		int num1 = anoIni - mesIni - diaIni;
 		
-		List<Venda> vendas = vendaRepository.findPordataVenda(periodo, now);
+		int anoFim = Integer.parseInt(numFim[0]);
+		int mesFim = Integer.parseInt(numFim[1]);
+		int diaFim = Integer.parseInt(numFim[2]);
+		int num2 = anoFim - mesFim - diaFim;
+		
+		int dias = num1 - num2;
 		
 		for(int cont = 0; cont < funcionarios.size(); cont++ ) {
 			List<Venda> vendasFunc = new ArrayList<Venda>();
@@ -45,7 +54,7 @@ public class CalculoMedia {
 				aux++;
 			}
 			
-			int media = vendasFunc.size() / diasPeriodo;
+			int media = vendasFunc.size() / dias;
 			
 			funcionarios.get(cont).setMediaVendas(media);
 			

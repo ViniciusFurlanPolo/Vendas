@@ -1,6 +1,7 @@
 package com.vendas.api.services;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vendas.api.entities.Funcionario;
+import com.vendas.api.entities.Venda;
 import com.vendas.api.repositories.FuncionarioRepository;
 import com.vendas.api.repositories.VendaRepository;
 import com.vendas.api.utils.ConsistenciaException;
+import com.vendas.api.utils.InicioFimEntitie;
 import com.vendas.api.utils.CalculoMedia;
 
 @Service
@@ -23,6 +26,9 @@ public class FuncionarioService {
 	
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
+	
+	@Autowired
+	private VendaRepository vendaRepository;
 	
 	//private CalculoMedia calculoMedia;
 	
@@ -39,19 +45,21 @@ public class FuncionarioService {
 		return funcionario;
 	}
 	
-	public List<Funcionario> buscasTodos (Date periodo) throws ConsistenciaException, ParseException{
+	public List<Funcionario> buscasTodos (InicioFimEntitie inicioFim) throws ConsistenciaException, ParseException{
 		log.info("Service: Buscando todos os funcionarios");
 		
 		CalculoMedia calculo = new CalculoMedia();
 		
 		List<Funcionario> funcionarios = funcionarioRepository.findAll();
 		
+		List<Venda> vendas = vendaRepository.findPordataVenda(inicioFim.getInicio(), inicioFim.getFim());
+		
 		if(funcionarios.size() < 1) {
 			log.info("Service: Nenhum funcionario encontrado");
 			throw new ConsistenciaException("Nenhum funcionario encontado");
 		}
 		
-		List<Funcionario> funcMedia = calculo.calculaMedia(periodo, funcionarios);
+		List<Funcionario> funcMedia = calculo.calculaMedia(inicioFim, vendas, funcionarios);
 		
 		return funcMedia;
 	}

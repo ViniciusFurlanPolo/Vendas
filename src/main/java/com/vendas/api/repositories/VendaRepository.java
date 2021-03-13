@@ -1,5 +1,6 @@
 package com.vendas.api.repositories;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface VendaRepository extends JpaRepository<Venda, Integer> {
 	List<Venda> findByid_func(int idFunc);
 	
 	@Transactional
-	@Query(value = "SELECT vd FROM Venda vd WHERE vd.data_da_venda BETWEEN (:dataInicio) AND (:dataFim)", nativeQuery = true)
-	List<Venda> findPordataVenda(@Param("dataInicio") Date periodo, @Param("dataFim") Date atual );
+	@Query(value = "SELECT * FROM venda  WHERE DATE(dataVenda) BETWEEN ':dataInicio' AND ':dataFim'", nativeQuery = true)
+	List<Venda> findPordataVenda(@Param("dataInicio") String periodo, @Param("dataFim") String atual );
 
 }

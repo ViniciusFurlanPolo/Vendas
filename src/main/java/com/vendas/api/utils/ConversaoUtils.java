@@ -1,7 +1,9 @@
 package com.vendas.api.utils;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.vendas.api.dto.FuncionarioDto;
@@ -82,6 +84,19 @@ public class ConversaoUtils {
 		vendaDto.setDataVenda(venda.getDataVenda().toString());
 		
 		return vendaDto;
+	}
+	
+	public static Date converterDataString(int periodo) throws ParseException {
+		Date now = new Date();
+		
+		long millinow = now.getTime();
+		int num1 = (int) (millinow / (1000*60*60*24));
+		int diff = num1 - periodo;
+		int milliDiff = diff * 86400000;
+		
+		Date data = new SimpleDateFormat("yyyy/MM/dd").parse(String.valueOf(milliDiff));
+		
+		return data;
 	}
 
 }
