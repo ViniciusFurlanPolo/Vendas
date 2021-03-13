@@ -86,17 +86,15 @@ public class ConversaoUtils {
 		return vendaDto;
 	}
 	
-	public static Date converterDataString(int periodo) throws ParseException {
-		Date now = new Date();
+	/*public static InicioFimEntitie converterDataString(InicioFimEntitie inicioFim) throws ParseException {
 		
-		long millinow = now.getTime();
-		int num1 = (int) (millinow / (1000*60*60*24));
-		int diff = num1 - periodo;
-		int milliDiff = diff * 86400000;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		
-		Date data = new SimpleDateFormat("yyyy/MM/dd").parse(String.valueOf(milliDiff));
+		
+		
+		
 		
 		return data;
-	}
+	}*/
 
 }

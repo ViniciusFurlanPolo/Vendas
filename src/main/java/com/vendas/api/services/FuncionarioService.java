@@ -1,6 +1,7 @@
 package com.vendas.api.services;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -48,11 +49,17 @@ public class FuncionarioService {
 	public List<Funcionario> buscasTodos (InicioFimEntitie inicioFim) throws ConsistenciaException, ParseException{
 		log.info("Service: Buscando todos os funcionarios");
 		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		CalculoMedia calculo = new CalculoMedia();
+		
+		Date data = format.parse(inicioFim.getInicio());
+		java.sql.Date dataSqlInicio = new java.sql.Date(data.getTime());
+		data = format.parse(inicioFim.getFim());
+		java.sql.Date dataSqlFim = new java.sql.Date(data.getTime());
 		
 		List<Funcionario> funcionarios = funcionarioRepository.findAll();
 		
-		List<Venda> vendas = vendaRepository.findPordataVenda(inicioFim.getInicio(), inicioFim.getFim());
+		List<Venda> vendas = vendaRepository.findBydataVendaBetween(dataSqlInicio, dataSqlFim);
 		
 		if(funcionarios.size() < 1) {
 			log.info("Service: Nenhum funcionario encontrado");

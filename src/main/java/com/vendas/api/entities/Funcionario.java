@@ -26,13 +26,13 @@ public class Funcionario implements Serializable {
 	private int totalVendas;
 	
 	@Column(name = "mediaVendas", nullable = false)
-	private int mediaVendas;
+	private float mediaVendas;
 
-	public int getMediaVendas() {
+	public float getMediaVendas() {
 		return mediaVendas;
 	}
 
-	public void setMediaVendas(int mediaVendas) {
+	public void setMediaVendas(float mediaVendas) {
 		this.mediaVendas = mediaVendas;
 	}
 

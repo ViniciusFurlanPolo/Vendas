@@ -28,8 +28,8 @@ public class CalculoMedia {
 		
 		//List<Venda> vendas = vendaRepository.findPordataVenda(inicioFim.getInicio(), inicioFim.getFim());
 		
-		String[] numIni = inicioFim.getInicio().split("-");
-		String[] numFim = inicioFim.getFim().split("-");
+		String[] numIni = inicioFim.getInicio().split("/");
+		String[] numFim = inicioFim.getFim().split("/");
 		
 		int anoIni = Integer.parseInt(numIni[0]);
 		int mesIni = Integer.parseInt(numIni[1]);
@@ -46,15 +46,17 @@ public class CalculoMedia {
 		for(int cont = 0; cont < funcionarios.size(); cont++ ) {
 			List<Venda> vendasFunc = new ArrayList<Venda>();
 			int aux = 0;
+			float help = 0;
 			for(Venda venda : vendas ) {
 				if(vendas.get(aux).getId() == funcionarios.get(cont).getId() ) {
 					vendasFunc.add(venda);
+					help++;
 				}
 				
 				aux++;
 			}
 			
-			int media = vendasFunc.size() / dias;
+			float media = help / dias;
 			
 			funcionarios.get(cont).setMediaVendas(media);
 			
