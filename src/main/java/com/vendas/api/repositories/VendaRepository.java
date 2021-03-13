@@ -17,7 +17,7 @@ public interface VendaRepository extends JpaRepository<Venda, Integer> {
 	List<Venda> findByid_func(int idFunc);
 	
 	@Transactional
-	@Query("SELECT vd FROM Venda vd WHERE vd.data_da_venda BETWEEN (:dataInicio) AND (:dataFim)")
+	@Query(value = "SELECT vd FROM Venda vd WHERE vd.data_da_venda BETWEEN (:dataInicio) AND (:dataFim)", nativeQuery = true)
 	List<Venda> findPordataVenda(@Param("dataInicio") Date periodo, @Param("dataFim") Date atual );
 
 }
