@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vendas.api.entities.Venda;
@@ -16,7 +17,7 @@ public interface VendaRepository extends JpaRepository<Venda, Integer> {
 	List<Venda> findByid_func(int idFunc);
 	
 	@Transactional
-	//@Query("SELECT vd FROM Venda vd WHERE vd.data_da_venda = :data")
-	List<Venda> findBydataVenda(Date data);
+	@Query("SELECT vd FROM Venda vd WHERE vd.data_da_venda BETWEEN (:dataInicio) AND (:dataFim)")
+	List<Venda> findPordataVenda(@Param("dataInicio") Date periodo, @Param("dataFim") Date atual );
 
 }

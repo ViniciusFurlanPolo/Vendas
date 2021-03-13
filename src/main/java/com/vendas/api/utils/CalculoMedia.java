@@ -21,48 +21,40 @@ public class CalculoMedia {
 	private VendaRepository vendaRepository;
 	
 	
-	@SuppressWarnings("deprecation")
-	public List<Funcionario> calculaMedia (int periodo, List<Funcionario> funcionarios) throws ConsistenciaException , ParseException{
+	
+	public List<Funcionario> calculaMedia (Date periodo, List<Funcionario> funcionarios) throws ConsistenciaException , ParseException{
 		
 		Date now = new Date();
 		
 		long milliNow = now.getTime();
+		long milliPeriodo = periodo.getTime();
+		long diff = milliNow - milliPeriodo;
 		
-		List<Long> datas = new ArrayList<Long>();
-		List<String> datasString = new ArrayList<String>();
+		int diasPeriodo = (int) (diff / (1000*60*60*24));
 		
-		for(int cont = 0; cont < funcionarios.size(); cont++) {
-			int media = 0;
-			int aux2 = 0;
-			for(int cont2 = 1; cont < periodo; cont++) {
-				datas.add(milliNow - (86400000 * cont2));
-				datasString.add(String.valueOf(datas.get(cont2 - 1)));
-				Date data = new Date(datasString.get(cont2));
-				
-				List<Venda> vendas = vendaRepository.findBydataVenda(data);
-				int aux = 0;
-				for(int cont3 = 0; cont < vendas.size(); cont++) {
-					if(funcionarios.get(cont).getId() == vendas.get(cont2).getFuncionario().getId()) {
-						aux++;
-					}
+		List<Venda> vendas = vendaRepository.findPordataVenda(periodo, now);
+		
+		for(int cont = 0; cont < funcionarios.size(); cont++ ) {
+			List<Venda> vendasFunc = new ArrayList<Venda>();
+			int aux = 0;
+			for(Venda venda : vendas ) {
+				if(vendas.get(aux).getId() == funcionarios.get(cont).getId() ) {
+					vendasFunc.add(venda);
 				}
-				media = media + aux;
-				aux2++;
 				
+				aux++;
 			}
-			media = media / aux2;
+			
+			int media = vendasFunc.size() / diasPeriodo;
 			
 			funcionarios.get(cont).setMediaVendas(media);
 			
 			
 		}
 		
+
 		
 		
-		
-		for(int cont = 0; cont < datas.size(); cont++) {
-			datasString.add(String.valueOf(datas.get(cont)));
-		}
 				
 		return funcionarios;
 	}

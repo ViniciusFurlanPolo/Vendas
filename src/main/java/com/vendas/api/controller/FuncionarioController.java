@@ -1,5 +1,6 @@
 package com.vendas.api.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.vendas.api.dto.FuncionarioDto;
@@ -57,8 +59,8 @@ public class FuncionarioController {
 		}
 	}
 	
-	@GetMapping(value = "/todos/{periodo}")
-	public ResponseEntity<Response<List<FuncionarioDto>>> buscarTodosFuncionarios(@PathVariable("periodo") int periodo) {
+	@GetMapping(value = "/todos")
+	public ResponseEntity<Response<List<FuncionarioDto>>> buscarTodosFuncionarios(@RequestBody Date periodo) {
 		
 		Response<List<FuncionarioDto>> response = new Response<List<FuncionarioDto>>();
 		
