@@ -95,5 +95,6 @@ public class VendaControllerTest {
 			.andExpect(jsonPath("$.erros").value("Teste Incosistencia"));
 		
 	}
+	
 
 }
